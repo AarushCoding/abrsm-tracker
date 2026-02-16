@@ -62,10 +62,10 @@ async def run_scraper():
                 # 7. Logic: If "Pending" is gone, it's celebration time
                 if "Pending" not in status_text and status_text != "":
                     # If the text changed, send the full result to Telegram
-                    await send_telegram(f"🎼 ABRSM UPDATE!\n\nAarush, your Grade 5 Result is ready:\n{status_text}")
+                    await send_telegram(f"🎼 ABRSM UPDATE!\n\nGrade 5 Result:\n{status_text}")
                     return # Exit successfully
 
-                await send_telegram(f'test')
+                
                 
                 print("Result still pending. Checking again next hour.")
                 break # Exit the retry loop but finish the script normally
