@@ -1,0 +1,31 @@
+name: ABRSM Result Checker
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour, on the hour
+  workflow_dispatch:      # Allows you to run it manually for testing
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/checkout@v3
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install playwright httpx
+          playwright install chromium
+
+      - name: Run Scraper
+        env:
+          ABRSM_USER: ${{ secrets.ABRSM_USER }}
+          ABRSM_PASS: ${{ secrets.ABRSM_PASS }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scraper.py
