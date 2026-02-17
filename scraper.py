@@ -32,7 +32,6 @@ async def run_scraper():
                 await page.goto("https://portal.abrsm.org/Global/Login", wait_until="networkidle", timeout=60000)
 
                 # 2. Wait for Azure B2C login fields
-                # We use the ID #signInName which is standard for their Microsoft login
                 await page.wait_for_selector('input#signInName', timeout=20000)
                 await page.fill('input#signInName', os.environ["ABRSM_USER"])
                 await page.fill('input#password', os.environ["ABRSM_PASS"])
@@ -64,7 +63,8 @@ async def run_scraper():
                     # If the text changed, send the full result to Telegram
                     await send_telegram(f"🎼 ABRSM UPDATE!\n\nGrade 5 Result:\n{status_text}")
                     return # Exit successfully
-
+                else:
+                    await send_telegram(f'test')
                 
                 
                 print("Result still pending. Checking again next hour.")
