@@ -63,8 +63,7 @@ async def run_scraper():
                     # If the text changed, send the full result to Telegram
                     await send_telegram(f"🎼 ABRSM UPDATE!\n\nGrade 5 Result:\n{status_text}")
                     return # Exit successfully
-                else:
-                    await send_telegram(f'test')
+                
                 
                 
                 print("Result still pending. Checking again next hour.")
